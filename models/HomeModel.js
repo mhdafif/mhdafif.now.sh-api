@@ -10,6 +10,6 @@ const HomeSchema = new mongoose.Schema({
   content: {
     type: String
   }
-})
+}, { versionKey : false })
 
 module.exports = mongoose.model('Home', HomeSchema);

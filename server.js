@@ -89,9 +89,11 @@ app.use('/api/v1/sendemail', sendMailRoute);
 app.use(errorHandler);
 
 const server = app.listen(PORT, () => {
-  // console.log(
-  //   `App listening in ${process.env.NODE_ENV} on port ${PORT} !`.cyan.bold
-  // );
+  if (process.env.NODE_ENV === 'development') {
+    console.log(
+      `App listening in ${process.env.NODE_ENV} on port ${PORT} !`.cyan.bold
+    );
+  }
 });
 
 // Handle unhandled promise rejections
