@@ -57,14 +57,14 @@ app.use(xss());
 
 var whitelist = process.env.WHITELIST.split(' ')
 var corsOptions = {
-  // origin: function (origin, callback) {
-  //   if (whitelist.indexOf(origin) !== -1) {
-  //     callback(null, true)
-  //   } else {
-  //     callback(new Error('Not allowed by CORS'))
-  //   }
-  // }
-  origin: '*'
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+  // origin: '*'
 }
 
 // enable Cors
@@ -89,9 +89,9 @@ app.use('/api/v1/sendemail', sendMailRoute);
 app.use(errorHandler);
 
 const server = app.listen(PORT, () => {
-  console.log(
-    `App listening in ${process.env.NODE_ENV} on port ${PORT} !`.cyan.bold
-  );
+  // console.log(
+  //   `App listening in ${process.env.NODE_ENV} on port ${PORT} !`.cyan.bold
+  // );
 });
 
 // Handle unhandled promise rejections
