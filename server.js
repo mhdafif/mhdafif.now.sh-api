@@ -17,6 +17,7 @@ const errorHandler = require('./middleware/error');
 
 // Route
 const homeRoute = require('./routes/homeRoute');
+const sendMailRoute = require('./routes/sendMailRoute');
 
 // Load env vars
 dotenv.config({path: './config/config.env'});
@@ -82,6 +83,7 @@ app.use(hpp());
 
 // Mount routes
 app.use('/api/v1/home', homeRoute);
+app.use('/api/v1/sendemail', sendMailRoute);
 
 // Middleware it must bellow of the mount router, cause the process is linear. 
 app.use(errorHandler);
