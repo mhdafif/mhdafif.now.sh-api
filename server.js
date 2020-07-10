@@ -81,9 +81,15 @@ app.use(limiter);
 // Prevent http param pollution with Hpp
 app.use(hpp());
 
+// Limit email send
+const limiterEmail = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+})
+
 // Mount routes
 app.use('/api/v1/home', homeRoute);
-app.use('/api/v1/sendemail', sendMailRoute);
+app.use('/api/v1/sendemail', limiterEmail, sendMailRoute);
 
 // Middleware it must bellow of the mount router, cause the process is linear. 
 app.use(errorHandler);
